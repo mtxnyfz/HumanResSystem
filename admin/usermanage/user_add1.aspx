@@ -17,7 +17,7 @@
             <f:FormRow ID="FormRow2" runat="server">
             <Items>
                    
-                <f:TextBox ID="TextBox_jgh" runat="server" Label="登录帐号(教工号)" Text="" Required="true" ShowRedStar="true">
+                <f:TextBox ID="TextBox_jgh" runat="server" Label="登录帐号(教工号1)" Text="" Required="true" ShowRedStar="true">
                 </f:TextBox>
                    
                   
