@@ -31,7 +31,7 @@ namespace HumanResSystem.Web.admin.bmxx
             string sqlstr = "";
 
             //sqlstr = "select GUID,DWH,DWMC,XJBZ from jctb0103 where XJSFSC!=1 and XJSFYX!=0";
-            sqlstr = "select GUID,DWH,DWMC,XJBZ,Version from jctb0103 as a where Version in (select max(version) from jctb0103  where XJSFSC!=1 and a.DWH=jctb0103.DWH) order by DWMC";
+            sqlstr = "select  GUID,DWH,DWMC,c.text as dwlb,DWYXBS,XJBZ from ( select GUID,DWH,DWMC,DWLBM,DWYXBS,XJBZ,Version from jctb0103 as a where Version in (select max(version) from jctb0103  where XJSFSC!=1 and XJSFYX=1 and a.DWH=jctb0103.DWH)) as b left join HumanResSystemCode.dbo.dwlbm  as c on b.DWLBM=c.code";
             dt = DbHelperSQL.Query(sqlstr).Tables[0];
             string sortField = Grid1.SortField;
             string sortDirection = Grid1.SortDirection;
@@ -139,6 +139,21 @@ namespace HumanResSystem.Web.admin.bmxx
             {
                 Alert.Show("请选中一条数据！", "系统提示", MessageBoxIcon.Warning);
                 Grid1.SelectedRowIndexArray = null; // 清空当前选中的项
+            }
+        }
+
+
+        protected void Grid1_RowDataBound(object sender, GridRowEventArgs e)
+        {
+            System.Web.UI.WebControls.Label lb = (System.Web.UI.WebControls.Label)Grid1.Rows[e.RowIndex].FindControl("Label2");
+            string DWYXBS = lb.Text.Trim();
+            if (DWYXBS == "1")
+            {
+                lb.Text = "是";
+            }
+            else
+            {
+                lb.Text = "否";
             }
         }
     }

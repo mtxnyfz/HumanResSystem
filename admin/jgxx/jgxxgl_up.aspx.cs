@@ -109,14 +109,17 @@ namespace HumanResSystem.Web.admin.jgxx
         {
             DropDownList_dw.Items.Clear();
             //DataTable dt = DataExecute.ExecuteDataset(DataExecute.ConnectionString2, CommandType.Text, "select text,code from [xbm] order by text").Tables[0];
-            DataTable dt = DbHelperSQL.Query("select [DWH],[DWMC] from [jctb0103] where XJSFSC!='1' and XJSFYX=1 order by DWMC").Tables[0];
+            DataTable dt = DbHelperSQL.Query("select [DWH],[DWMC] from [jctb0103] where XJSFSC!='1' and XJSFYX=1 and DWYXBS='1' order by DWMC").Tables[0];
             DropDownList_dw.DataSource = dt;
             DropDownList_dw.DataTextField = "DWMC";
             DropDownList_dw.DataValueField = "DWH";
             DropDownList_dw.DataBind();
 
 
-        
+
+            DropDownList_dw.Items.Add("请选择", "请选择");
+
+            dp_setvalue(DropDownList_dw, "请选择");
 
             dp_setvalue(DropDownList_dw, text);
         }
@@ -131,8 +134,10 @@ namespace HumanResSystem.Web.admin.jgxx
             DropDownList_xb.DataBind();
 
 
-          
 
+            DropDownList_xb.Items.Add("请选择", "请选择");
+
+            dp_setvalue(DropDownList_xb, "请选择");
             dp_setvalue(DropDownList_xb,  text);
         }
 
@@ -145,7 +150,9 @@ namespace HumanResSystem.Web.admin.jgxx
             DropDownList_mz.DataValueField = "code";
             DropDownList_mz.DataBind();
 
+            DropDownList_mz.Items.Add("请选择", "请选择");
 
+            dp_setvalue(DropDownList_mz, "请选择");
             //DropDownList_xb.Items.Add("请选择", "请选择");
 
             dp_setvalue(DropDownList_mz,  text);
@@ -161,7 +168,9 @@ namespace HumanResSystem.Web.admin.jgxx
             DropDownList_gj.DataBind();
 
 
+            DropDownList_gj.Items.Add("请选择", "请选择");
 
+            dp_setvalue(DropDownList_gj, "请选择");
 
             dp_setvalue(DropDownList_gj, text);
         }
@@ -177,7 +186,9 @@ namespace HumanResSystem.Web.admin.jgxx
             DropDownList_sfzlx.DataBind();
 
 
+            DropDownList_sfzlx.Items.Add("请选择", "请选择");
 
+            dp_setvalue(DropDownList_sfzlx, "请选择");
 
             dp_setvalue(DropDownList_sfzlx,  text);
         }
@@ -220,9 +231,11 @@ namespace HumanResSystem.Web.admin.jgxx
             DropDownList_zzmm.DataTextField = "text";
             DropDownList_zzmm.DataValueField = "code";
             DropDownList_zzmm.DataBind();
-          
 
 
+            DropDownList_zzmm.Items.Add("请选择", "请选择");
+
+            dp_setvalue(DropDownList_zzmm, "请选择");
 
             dp_setvalue(DropDownList_zzmm,text);
         }
@@ -236,7 +249,9 @@ namespace HumanResSystem.Web.admin.jgxx
             DropDownList_jkzk.DataValueField = "code";
             DropDownList_jkzk.DataBind();
 
+            DropDownList_jkzk.Items.Add("请选择", "请选择");
 
+            dp_setvalue(DropDownList_jkzk, "请选择");
 
 
             dp_setvalue(DropDownList_jkzk, text);
@@ -250,8 +265,10 @@ namespace HumanResSystem.Web.admin.jgxx
             DropDownList_ryxz.DataTextField = "text";
             DropDownList_ryxz.DataValueField = "code";
             DropDownList_ryxz.DataBind();
-          
 
+            DropDownList_ryxz.Items.Add("请选择", "请选择");
+
+            dp_setvalue(DropDownList_ryxz, "请选择");
 
 
             dp_setvalue(DropDownList_ryxz, text);
@@ -267,7 +284,9 @@ namespace HumanResSystem.Web.admin.jgxx
             DropDownList_dqzt.DataBind();
 
 
+            DropDownList_dqzt.Items.Add("请选择", "请选择");
 
+            dp_setvalue(DropDownList_dqzt, "请选择");
 
             dp_setvalue(DropDownList_dqzt, text);
         }
@@ -275,13 +294,14 @@ namespace HumanResSystem.Web.admin.jgxx
         protected void DropDownList_yh_databind(string text)
         {
             DropDownList_yh.Items.Clear();
-            DataTable dt = DataExecute.ExecuteDataset(DataExecute.ConnectionString2, CommandType.Text, "select [text],[code] from [yhlxm] order by code").Tables[0];
+            DataTable dt = DataExecute.ExecuteDataset(DataExecute.ConnectionString2, CommandType.Text, "select [text],[code] from [yhlxm] where  code=12 or code=13 order by code").Tables[0];
             DropDownList_yh.DataSource = dt;
             DropDownList_yh.DataTextField = "text";
             DropDownList_yh.DataValueField = "code";
             DropDownList_yh.DataBind();
 
-
+            DropDownList_yh.Items.Add("请选择", "请选择");
+            dp_setvalue(DropDownList_yh, "请选择");
 
 
             dp_setvalue(DropDownList_yh, text);

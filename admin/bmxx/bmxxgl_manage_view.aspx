@@ -18,7 +18,7 @@
                 
                <f:Grid ID="Grid1" Title="Grid1" PageSize="20" ShowBorder="true" BoxFlex="1" AllowPaging="true"
                     ShowHeader="false" runat="server" 
-                    DataKeyNames="GUID" OnPageIndexChange="Grid1_PageIndexChange" EnableCheckBoxSelect="true" EnableMultiSelect="false"  OnSort="Grid1_Sort" AllowSorting="true" SortDirection="ASC" SortField="DWMC">
+                    DataKeyNames="GUID" OnPageIndexChange="Grid1_PageIndexChange" EnableCheckBoxSelect="true" EnableMultiSelect="false"  OnSort="Grid1_Sort" AllowSorting="true" SortDirection="ASC" SortField="DWMC" OnRowDataBound="Grid1_RowDataBound">
                    <%-- <Toolbars>
                         <f:Toolbar ID="Toolbar2" runat="server">
                            <Items>
@@ -52,6 +52,12 @@
                         
                          <f:BoundField Width="150px" DataField="DWH" HeaderText="部门编号" ID="BoundField7" SortField="DWH"/>
                          <f:BoundField Width="250px" DataField="DWMC" HeaderText="部门名称" ID="BoundField1" SortField="DWMC"/>
+                           <f:TemplateField HeaderText="部门是否有效"  ColumnID="Panel7_Grid2_ylfw_ctl18" SortField="DWYXBS" Width="180px">
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%#Eval("DWYXBS")%>'></asp:Label>
+                    </ItemTemplate>
+
+                </f:TemplateField >
                         <f:BoundField Width="150px" DataField="XJBZ" HeaderText="备注" ID="BoundField2"/>
                      
                      

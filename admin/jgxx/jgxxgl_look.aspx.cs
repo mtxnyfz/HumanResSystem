@@ -267,7 +267,8 @@ namespace HumanResSystem.Web.admin.jgxx
             DropDownList_yh.DataTextField = "text";
             DropDownList_yh.DataValueField = "code";
             DropDownList_yh.DataBind();
-
+            //DropDownList_yh.Items.Add("请选择", "请选择");
+            //dp_setvalue(DropDownList_yh, "请选择");
 
 
 
@@ -275,17 +276,20 @@ namespace HumanResSystem.Web.admin.jgxx
         }
         protected void dp_setvalue(FineUI.DropDownList ddl, string value)
         {
+            int flag = 0;
             for (int i = 0; i < ddl.Items.Count; i++)
             {
                 if (ddl.Items[i].Value.Trim() == value)    //与数据库中查询出来的那条一样.
                 {
 
                     ddl.SelectedIndex = i;      //这样就可以显示出来了.
-
+                    flag = 1;
                     break;        //选中一条后,跳出循环.
                 }
             }
+            if (flag == 0)
 
+                ddl.SelectedItem.Text = "";
         }
 
 

@@ -73,7 +73,7 @@
                        <%--  <f:TextBox ID="TextBox1"  Label="备注"     CssClass="formitem" runat="server" Margin="10 15 0 0" ColumnWidth="80%">
                         </f:TextBox>--%>
                         
-                        <f:TextArea ID="TextArea_bz" runat="server" Height="80px" Label="备注" Text="" Margin="10 15 0 0" ColumnWidth="70%"></f:TextArea>
+                        <f:TextArea ID="TextArea_bz" runat="server" Height="80px" Label="备注" Text="" Margin="10 15 0 15" ColumnWidth="70%"></f:TextArea>
                     </Items>
                 </f:Panel>
                   </items>

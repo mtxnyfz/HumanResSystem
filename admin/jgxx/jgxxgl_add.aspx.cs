@@ -39,7 +39,7 @@ namespace HumanResSystem.Web.admin
         {
             DropDownList_dw.Items.Clear();
             //DataTable dt = DataExecute.ExecuteDataset(DataExecute.ConnectionString2, CommandType.Text, "select text,code from [xbm] order by text").Tables[0];
-            DataTable dt = DbHelperSQL.Query("select [DWH],[DWMC] from [jctb0103] where XJSFSC!='1' and XJSFYX=1  order by DWMC").Tables[0];
+            DataTable dt = DbHelperSQL.Query("select [DWH],[DWMC] from [jctb0103] where XJSFSC!='1' and XJSFYX=1 and DWYXBS='1'  order by DWMC").Tables[0];
             DropDownList_dw.DataSource = dt;
             DropDownList_dw.DataTextField = "DWMC";
             DropDownList_dw.DataValueField = "DWH";
@@ -205,7 +205,7 @@ namespace HumanResSystem.Web.admin
         protected void DropDownList_yh_databind()
         {
             DropDownList_yh.Items.Clear();
-            DataTable dt = DataExecute.ExecuteDataset(DataExecute.ConnectionString2, CommandType.Text, "select [text],[code] from [yhlxm] order by code").Tables[0];
+            DataTable dt = DataExecute.ExecuteDataset(DataExecute.ConnectionString2, CommandType.Text, "select [text],[code] from [yhlxm] where code=12 or code=13 order by code").Tables[0];
             DropDownList_yh.DataSource = dt;
             DropDownList_yh.DataTextField = "text";
             DropDownList_yh.DataValueField = "code";

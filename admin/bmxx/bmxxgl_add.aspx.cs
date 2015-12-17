@@ -39,7 +39,7 @@ namespace HumanResSystem.Web.admin.bmxx
                 Alert.Show("请选择部门是否有效");
                 return;
             }
-            string sqlstr = "select DWH from jctb0103 where (DWH='" + bmbh + "' or DWMC='" + bmmc + "') and  XJSFSC!='1' ";
+            string sqlstr = "select DWH from jctb0103 where (DWH='" + bmbh + "' or DWMC='" + bmmc + "') and  XJSFSC!=1 ";
             SqlDataReader sdr = DbHelperSQL.ExecuteReader(sqlstr);
          
             if (sdr.Read())

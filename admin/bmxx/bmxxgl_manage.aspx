@@ -52,12 +52,12 @@
                         
                          <f:BoundField Width="150px" DataField="DWH" HeaderText="部门编号" ID="BoundField7" SortField="DWH"/>
                          <f:BoundField Width="250px" DataField="DWMC" HeaderText="部门名称" ID="BoundField1" SortField="DWMC"/>
-                          <f:TemplateField HeaderText="部门类别"  ColumnID="Panel7_Grid2_ylfw_ctl17" SortField="dwlb" Width="150px">
+                        <%--  <f:TemplateField HeaderText="部门类别"  ColumnID="Panel7_Grid2_ylfw_ctl17" SortField="dwlb" Width="150px">
                     <ItemTemplate >
                         <asp:Label ID="Label1" runat="server" Text='<%#Eval("dwlb")%>'></asp:Label>
                     </ItemTemplate>
 
-                </f:TemplateField  >
+                </f:TemplateField  >--%>
                           <f:TemplateField HeaderText="部门是否有效"  ColumnID="Panel7_Grid2_ylfw_ctl18" SortField="DWYXBS" Width="180px">
                     <ItemTemplate>
                         <asp:Label ID="Label2" runat="server" Text='<%#Eval("DWYXBS")%>'></asp:Label>
