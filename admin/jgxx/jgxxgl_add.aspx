@@ -146,7 +146,7 @@
                     <Items>
                         
                         <f:DatePicker runat="server" Required="true" EnableEdit="false" Label="进校时间(年月)" EmptyText="请选择时间"
-                    ID="DatePicker_jxsj" ShowRedStar="True" Margin="10 15 0 15" ColumnWidth="50%"  DateFormatString="yyyy-MM">
+                    ID="DatePicker_jxsj" ShowRedStar="True" Margin="10 15 0 15" ColumnWidth="50%"  DateFormatString="yyyy-MM-dd">
                 </f:DatePicker>
                           <f:DropDownList ID="DropDownList_dqzt" runat="server" Label="当前状态"  CssClass="formitem" Margin="10 15 0 15" ColumnWidth="50%" Enabled="false">
                           
