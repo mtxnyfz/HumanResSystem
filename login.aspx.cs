@@ -87,9 +87,16 @@ namespace EmptyProjectNet20
             string name = "";
             string mobile = "";
             //string sqlstr = "SELECT   Users.UserId, Users.Name, RoleUser.RoleId FROM      Users INNER JOIN RoleUser ON Users.UserId = RoleUser.UserId where Users.Name='" + userName + "' and Users.Password='" + password + "'";
-            string sqlstr = "SELECT   Users.user_uid, Users.ActualName,Users.mobile FROM      Users  where Users.Name='" + userName + "' and Users.Password='" + password + "'";
+            string sqlstr = "SELECT   Users.user_uid, Users.ActualName,Users.mobile FROM      Users  where Users.Name=@Name and Users.Password=@Password";
             //string sqlstr = "SELECT   Users.user_uid, Users.ActualName,Users.mobile FROM      Users  where Users.Name='" + userName + "' and Users.Password='" + password + "'";
-            SqlDataReader sdr = DbHelperSQL.ExecuteReader(sqlstr);
+            SqlParameter[] parameters = {
+					new SqlParameter("@Name", SqlDbType.NVarChar,50),
+					new SqlParameter("@Password", SqlDbType.NChar,10)
+					};
+            parameters[0].Value = userName;
+            parameters[1].Value = password;
+
+            SqlDataReader sdr = DbHelperSQL.ExecuteReader(sqlstr, parameters);
 
             //GridRow gr = Grid1.Rows[e.RowIndex];
             if (sdr.Read())
@@ -155,9 +162,17 @@ namespace EmptyProjectNet20
             string name = "";
             string mobile = "";
             //string sqlstr = "SELECT   Users.UserId, Users.Name, RoleUser.RoleId FROM      Users INNER JOIN RoleUser ON Users.UserId = RoleUser.UserId where Users.Name='" + userName + "' and Users.Password='" + password + "'";
-            string sqlstr = "SELECT   Users.user_uid, Users.ActualName,Users.mobile FROM      Users  where Users.Name='" + userName + "'";
+            string sqlstr = "SELECT   Users.user_uid, Users.ActualName,Users.mobile FROM      Users  where Users.Name=@Name";
             //string sqlstr = "SELECT   Users.user_uid, Users.ActualName,Users.mobile FROM      Users  where Users.Name='" + userName + "' and Users.Password='" + password + "'";
-            SqlDataReader sdr = DbHelperSQL.ExecuteReader(sqlstr);
+            SqlParameter[] parameters = {
+					new SqlParameter("@Name", SqlDbType.NVarChar,50)
+					
+					};
+            parameters[0].Value = userName;
+          
+
+            SqlDataReader sdr = DbHelperSQL.ExecuteReader(sqlstr, parameters);
+            //SqlDataReader sdr = DbHelperSQL.ExecuteReader(sqlstr);
 
             //GridRow gr = Grid1.Rows[e.RowIndex];
             if (sdr.Read())

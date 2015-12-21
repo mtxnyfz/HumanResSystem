@@ -19,18 +19,21 @@ namespace HumanResSystem.Web.admin.jgxx
         {
             if (!IsPostBack)
             {
-               
-                databind();
+                ViewState["key"] = "";
+
+                databind(ViewState["key"].ToString());
             }
         }
 
-        protected void databind()
+        protected void databind(string key)
         {
            
             DataTable dt = null;
             string sqlstr = "";
-
-            sqlstr = " select uid,XM,GH,b.text as xb,c.text as xz,d.DWMC from (select GUID as uid,XM,XBM,GH,DWH,XJRYXZ,Version from gxjg0101 as n where Version = (select MAX(Version) from gxjg0101 where GH = n.GH and XJSFSC!=1 and XJSFYX=1)) as a  left join [HumanResSystemCode].[dbo].[xbm] as b on a.XBM=b.code left join [HumanResSystemCode].[dbo].xjryxzm as c on a.XJRYXZ=c.code left join jctb0103 as d on a.DWH=d.DWH where d.XJSFYX=1";
+            if(!string.IsNullOrEmpty(key))
+                sqlstr = " select uid,XM,GH,b.text as xb,c.text as xz,d.DWMC from (select GUID as uid,XM,XBM,GH,DWH,XJRYXZ,Version from gxjg0101 as n where Version = (select MAX(Version) from gxjg0101 where GH = n.GH and XJSFSC!=1 and XJSFYX=1)) as a  left join [HumanResSystemCode].[dbo].[xbm] as b on a.XBM=b.code left join [HumanResSystemCode].[dbo].xjryxzm as c on a.XJRYXZ=c.code left join jctb0103 as d on a.DWH=d.DWH where d.XJSFYX=1 and (a.GH like '%" + key + "%' or a.XM like '%" + key + "%' or d.DWMC like '%" + key + "%')";
+            else
+                sqlstr = " select uid,XM,GH,b.text as xb,c.text as xz,d.DWMC from (select GUID as uid,XM,XBM,GH,DWH,XJRYXZ,Version from gxjg0101 as n where Version = (select MAX(Version) from gxjg0101 where GH = n.GH and XJSFSC!=1 and XJSFYX=1)) as a  left join [HumanResSystemCode].[dbo].[xbm] as b on a.XBM=b.code left join [HumanResSystemCode].[dbo].xjryxzm as c on a.XJRYXZ=c.code left join jctb0103 as d on a.DWH=d.DWH where d.XJSFYX=1";
             dt = DbHelperSQL.Query(sqlstr).Tables[0];
             string sortField = Grid1.SortField;
             string sortDirection = Grid1.SortDirection;
@@ -53,7 +56,7 @@ namespace HumanResSystem.Web.admin.jgxx
            
             Grid1.SortDirection = e.SortDirection;
             Grid1.SortField = e.SortField;
-            databind();
+            databind(ViewState["key"].ToString());
 
            
         }
@@ -62,12 +65,12 @@ namespace HumanResSystem.Web.admin.jgxx
 
             Grid1.PageIndex = e.NewPageIndex;
             Grid1.DataBind();
-            databind();
+            databind(ViewState["key"].ToString());
 
         }
         protected void Window1_Close(object sender, WindowCloseEventArgs e)
         {
-            databind();
+            databind(ViewState["key"].ToString());
             Alert.Show("操作成功");
 
         }
@@ -125,7 +128,7 @@ namespace HumanResSystem.Web.admin.jgxx
                 string sqlstr = "update gxjg0101 set XJSFSC='1',XJSCRY='" + pb.GetIdentityId() + "',XJSCSJ='"+DateTime.Now+"' where GUID='" + uid + "'";
                 if (DbHelperSQL.ExecuteSql(sqlstr) > 0)
                 {
-                    databind();
+                    databind(ViewState["key"].ToString());
                     Alert.Show("删除成功");
                 }
                 else
@@ -139,6 +142,20 @@ namespace HumanResSystem.Web.admin.jgxx
                 Alert.Show("请选中一条数据！", "系统提示", MessageBoxIcon.Warning);
                 Grid1.SelectedRowIndexArray = null; // 清空当前选中的项
             }
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            ViewState["key"] = TextBox_key.Text.Trim();
+            Grid1.PageIndex =0;
+            databind(ViewState["key"].ToString());
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            ViewState["key"] = "";
+            Grid1.PageIndex = 0;
+            databind(ViewState["key"].ToString());
         }
     }
 }

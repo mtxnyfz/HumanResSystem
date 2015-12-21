@@ -6,6 +6,31 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+     <link rel="stylesheet" href="../../res/jqueryuiautocomplete/jquery-ui.min.css" />
+    <link rel="stylesheet" href="../../res/jqueryuiautocomplete/theme-start/theme.css" />
+     <style>
+        .ui-autocomplete-loading {
+            background: white url('../../res/images/ui-anim_basic_16x16.gif') right center no-repeat;
+        }
+        .autocomplete-item-title
+    {
+        font-weight: bold;
+    }
+     .ui-autocomplete {
+            max-height: 80%;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+
+        .auto-style1 {
+            width: 100%;
+        }
+
+        .wz {
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -41,9 +66,12 @@
                                 </f:Button>
                                 <f:ToolbarSeparator ID="ToolbarSeparator4" runat="server">
                                 </f:ToolbarSeparator>
-                                
-                               
-                             
+                                   <f:TextBox ID="TextBox_key" Label=""  EmptyText="请输入教工号或姓名或部门等关键字搜索" Width="300px"   runat="server" ShowLabel="false">
+                                </f:TextBox>
+                                <f:Button ID="Button3" Text="搜索" runat="server"  OnClick="Button3_Click">
+                                </f:Button>
+                                <f:Button ID="Button4" Text="显示所有" runat="server"   OnClick="Button4_Click">
+                                </f:Button>
                             </Items>
                         </f:Toolbar>
                     </Toolbars>
@@ -87,5 +115,58 @@
           
         </f:Window>
     </form>
+
+      <script src="../../res/js/jquery.min.js" type="text/javascript"></script>
+    <script src="../../res/jqueryuiautocomplete/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var textbox1ID = '<%= TextBox_key.ClientID %>';
+      
+        v = '<%= TextBox_key.Text.Trim() %>'
+
+        F.ready(function () {
+
+            var cache = {};
+
+           
+
+                $('#' + textbox1ID + ' input').autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        var term1 = request.term;
+                      
+
+                        $.getJSON("search_jgxx.ashx?timestamp=" + new Date().getTime(), request, function (data, status, xhr) {
+                            cache[term1] = data;
+                         
+                            response(cache[term1]);
+
+
+                        });
+
+                    },
+                    select: function (event, ui) {
+                        var $this = $(this);
+                        $this.val(ui.item.gh);
+
+                        //$('#' + TextBox_fzr + ' input').val(ui.item.fzr);
+                        //$('#' + NumberBox_jfye + ' input').val(ui.item.ye);
+                        //$('#' + HiddenField_xmbh + ' input').val(ui.item.xmbh);
+                        //$('#' + HiddenField_id + ' input').val(ui.item.id);
+                        cache = {};
+                        return false;
+                    }
+                }).autocomplete("instance")._renderItem = function (ul, item) {
+                   
+                   
+                        return $("<li>")
+                            .append("<a><span class='autocomplete-item-title'>姓名：</span>" + item.xm + "&nbsp;&nbsp;&nbsp;&nbsp;<span class='autocomplete-item-title'>教工号：</span>" + item.gh + "<br/><span class='autocomplete-item-title'>部门 ：</span>" + item.dwmc + "</a>")
+                            .appendTo(ul);
+                   
+                };
+            
+
+        });
+
+    </script>
 </body>
 </html>
